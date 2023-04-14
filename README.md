@@ -62,4 +62,4 @@ I will architech the repo with a page object model (POM) structure in mind. This
 
 ### Execute Specs:
 - In a terminal, cd to the root of the project, based on the path it is saved at
-- Run the command: `mocha ./test/specs/login.specs.js`
+- Run the command: `npm test`

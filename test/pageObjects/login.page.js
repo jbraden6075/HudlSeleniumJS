@@ -18,9 +18,17 @@ class loginPage {
         await driver.findElement(By.cssSelector(dataQaId));
     };
 
-    async waitForPage(timeout) {
-        await driver.wait(until.titleIs('Home - Hudl'), timeout);
+    async clickByClassName(className) {
+        await driver.findElement(By.ClassName(className));
     };
+
+    async waitForPage(className, timeout) {
+        await driver.wait(until.elementIsVisible(driver.findElement(By.className(className, timeout))));
+    };
+
+    async sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
 
 module.exports = new loginPage();
