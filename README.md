@@ -8,6 +8,8 @@ Since this project is specific to the login page and its functionality, I will s
 
 Just for the sake of this project, I am assuming there are no bugs on the production login page for hudl.com. This means that the results I am given per the browser actions executed are the expected results. 
 
+Since I was asked to use Selenium for this project, which requires downloading drivers to control the browsers, this project will only control the Google Chrome browser as proof. 
+
 ## The Ask:
 - Setup an automation environment on your local machine using Selenium
 
@@ -49,3 +51,15 @@ I will architech the repo with a page object model (POM) structure in mind. This
 - Empty email and password will display message
 - Invalid email will display message
 - Valid email with invalid password will display message
+
+## Run Project:
+
+### Prerequisites:
+- The environment will need Chrome browser version 102 installed
+- Clone the project ([Instructions]([Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)))
+- In a terminal, cd to the root of the project, based on the path it is saved at
+    - Run the command: `npm install` (This will install all the dependencies needed to run the project)
+
+### Execute Specs:
+- In a terminal, cd to the root of the project, based on the path it is saved at
+- Run the command: `mocha ./test/specs/login.specs.js`
