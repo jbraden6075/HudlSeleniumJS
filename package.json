@@ -2,9 +2,8 @@
   "name": "hudlseleniumjs",
   "version": "1.0.0",
   "description": "Tech interview project for Hudl using Selenium with JavaScript.",
-  "main": "index.js",
   "scripts": {
-    "test": "mocha ./login.spec.js"
+    "test": "mocha ./test/specs/login.spec.js --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -15,5 +14,10 @@
   "bugs": {
     "url": "https://github.com/jbraden6075/HudlSeleniumJS/issues"
   },
-  "homepage": "https://github.com/jbraden6075/HudlSeleniumJS#readme"
+  "homepage": "https://github.com/jbraden6075/HudlSeleniumJS#readme",
+  "devDependencies": {
+    "chromedriver": "^112.0.0",
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.8.2"
+  }
 }
