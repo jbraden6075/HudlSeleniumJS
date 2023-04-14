@@ -1,0 +1,19 @@
+{
+  "name": "hudlseleniumjs",
+  "version": "1.0.0",
+  "description": "Tech interview project for Hudl using Selenium with JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./login.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbraden6075/HudlSeleniumJS.git"
+  },
+  "author": "Justin Braden CTAL-TAE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbraden6075/HudlSeleniumJS/issues"
+  },
+  "homepage": "https://github.com/jbraden6075/HudlSeleniumJS#readme"
+}
