@@ -1,17 +1,19 @@
-const { By } = require("selenium-webdriver")
+const { By, Builder } = require("selenium-webdriver")
 const softAssert = require("soft-assert")
 const loginPage = require("../pageObjects/login.page");
 require("chromedriver");
 
-// let driver = new Builder().forBrowser("chrome").build();
 
 describe('Login Page', function () {
     it('will navigate to hudl.com/home after a successful user login', async () => {
+        // Initiating the driver
+        driver = new Builder().forBrowser("chrome").build();
+
         // Declaring variables
         let loginURL = "https://hudl.com/login";
         let email = 'jbraden@protonmail.com';
         let password = ''; // Put password value here
-        let userName = 'Justin C';
+        let userName = 'Justin B';
 
         try {
             // Navigates to hudl.com/login
@@ -32,10 +34,32 @@ describe('Login Page', function () {
             softAssert.softAssert(labelUserName, userName);
         } catch {
         } finally {
-            // Closing the browser at the end of the script
-            await loginPage.closeBrowser();
+            // Quiting the driver instance
+            driver.quit();
 
             // Finalizing any and all assertions to show the pass/fail report in the terminal
+            softAssert.softAssertAll();
+        };
+    });
+
+    it('will navigate to hudl.com after clicking the hudl logo', async () => {
+        driver = new Builder().forBrowser("chrome").build();
+
+        let loginURL = "https://hudl.com/login";
+        let btnLogInValue = 'Log in';
+
+        try {
+            await loginPage.go_to(loginURL)
+            await loginPage.clickByDataQaId("[data-qa-id='hudl-logo']")
+
+            await loginPage.waitForPage(10000);
+
+            let btnLogIn = await driver.findElement(By.cssSelector("[data-qa-id='login-select']")).getText();
+
+            softAssert.softAssert(btnLogIn, btnLogInValue)
+        } catch {
+        } finally {
+            driver.quit()
             softAssert.softAssertAll();
         };
     });
