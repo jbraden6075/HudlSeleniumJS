@@ -2,10 +2,6 @@ const { By, Builder, until } = require("selenium-webdriver");
 require("chromedriver");
 
 class loginPage {
-    constructor() {
-        global.driver = new Builder().forBrowser("chrome").build();
-    };
-    
     async go_to(url) {
         await driver.get(url);
     };
@@ -18,12 +14,12 @@ class loginPage {
         await driver.findElement(By.id(id)).click();
     };
 
-    async waitForPage(timeout) {
-        await driver.wait(until.titleIs('Home - Hudl'), timeout);
+    async clickByDataQaId(dataQaId) {
+        await driver.findElement(By.cssSelector(dataQaId));
     };
 
-    async closeBrowser() {
-        await driver.quit();
+    async waitForPage(timeout) {
+        await driver.wait(until.titleIs('Home - Hudl'), timeout);
     };
 }
 
