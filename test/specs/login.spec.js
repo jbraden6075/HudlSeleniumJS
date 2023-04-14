@@ -1,35 +1,42 @@
-const { By, Key, Builder } = require("selenium-webdriver");
-const assert = require("assert")
+const { By } = require("selenium-webdriver")
+const softAssert = require("soft-assert")
+const loginPage = require("../pageObjects/login.page");
 require("chromedriver");
 
-describe('Login Page', function() {
-    it('will navigate to hudl.com/home after a successful user login', async function() {
-        //To wait for browser to build and launch properly
-        let driver = await new Builder().forBrowser("chrome").build();
+// let driver = new Builder().forBrowser("chrome").build();
+
+describe('Login Page', function () {
+    it('will navigate to hudl.com/home after a successful user login', async () => {
+        // Declaring variables
+        let loginURL = "https://hudl.com/login";
+        let email = 'jbraden@protonmail.com';
+        let password = ''; // Put password value here
+        let userName = 'Justin C';
 
         try {
             // Navigates to hudl.com/login
-            await driver.get("http://hudl.com/login");
+            await loginPage.go_to(loginURL);
 
-            // Sets an implicit timeout for the driver of 5 seconds
-            await driver.manage().setTimeouts({implicit: 5000});
+            // Calling loginPage methods to perform actions
+            await loginPage.enterTextById('email', email);
+            await loginPage.enterTextById('password', password);
+            await loginPage.clickById('logIn');
 
-            let txtEmail = await driver.findElement(By.id('email'));
-            let txtPassword = await driver.findElement(By.id('password'))
-            let btnLogIn = await driver.findElement(By.id('logIn'))
+            // Waiting for the page to load before continuing
+            await loginPage.waitForPage(10000);
 
-            await txtEmail.sendKeys('jbraden@protonmail.com')
+            // Declaring the user name element on the home page and getting its value
+            let labelUserName = await driver.findElement(By.className('hui-globaluseritem__display-name')).getText();
 
-            await btnLogIn.click()
+            // Soft asserting that the user menu value and userName variable match to prove the correct user was logged in.
+            softAssert.softAssert(labelUserName, userName);
+        } catch {
+        } finally {
+            // Closing the browser at the end of the script
+            await loginPage.closeBrowser();
 
-            let labelUserName = await driver.findElement(By.className('hui-globaluseritem__display-name'));
-            labelUserName.getText()
-
-            assert.equal("Justin B", labelUserName())
-        }catch (error){
-            console.error(error)
-            //It is always a safe practice to quit the browser after execution
-            await driver.quit();
+            // Finalizing any and all assertions to show the pass/fail report in the terminal
+            softAssert.softAssertAll();
         };
     });
 });
